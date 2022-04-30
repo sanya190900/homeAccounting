@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { environment } from '../../environments/environment';\nexport const API_LINKS = {\n  TRANSACTIONS_URL: environment.baseUrl + '/transactions',\n  WALLETS_URL: environment.baseUrl + '/wallets',\n  USAGE_URL: environment.baseUrl + '/dashboard/usage'\n};","map":null,"metadata":{},"sourceType":"module"}

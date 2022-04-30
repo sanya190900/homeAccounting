@@ -1,0 +1,55 @@
+<h1 mat-dialog-title *ngIf="action == 'ADD'">Adding new transaction</h1>
+<h1 mat-dialog-title *ngIf="action == 'UPDATE'">Updating transaction</h1>
+<h1 mat-dialog-title *ngIf="action == 'DELETE'">Are you sure to remove transaction?</h1>
+
+<div mat-dialog-content *ngIf="action != 'DELETE'">
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div fxFlex="50">
+        <img class="photo" [src]="localData.photo == null ? '/assets/placeholders/receiptPlaceholder.jpg': localData.photo">
+      </div>
+      <div fxFlex fxLayout="column">
+<!--        Category of transaction-->
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="localData.category" name="category" (selectionChange)="onCategoryChange()">
+            <mat-select-trigger class="category">
+              <mat-icon>{{localData.category.icon}}</mat-icon>
+              <span>{{localData.category.name}}</span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let category of categories" [value]="category" class="category">
+              <mat-icon>{{category.icon}}</mat-icon>
+              <span>{{category.name}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+<!--        Value of transaction-->
+          <mat-form-field appearance="outline" style="width: 48%">
+            <mat-label>Value</mat-label>
+            <span matPrefix><mat-icon>{{type}}</mat-icon></span>
+            <input matInput [(ngModel)]="localData.value">
+          </mat-form-field>
+<!--        Date of transaction-->
+          <mat-form-field appearance="outline" style="width: 48%">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [ngxMatDatetimePicker]="picker" [(ngModel)]="localData.date">
+            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+          </mat-form-field>
+        </div>
+<!--        Description of transaction-->
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="localData.description"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="end stretch" style="margin-top: 20px">
+  <div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+    <button mat-button (click)="doAction()" mat-flat-button color="primary">{{action}}</button>
+  </div>
+</div>

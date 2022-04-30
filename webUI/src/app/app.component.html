@@ -1,0 +1,39 @@
+<mat-toolbar>
+  Keep everything under your control!
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <img class="avatar mat-elevation-z8" src="https://njorogeandkatisya.co.ke/wp-content/uploads/2017/06/1725629.png">
+    <h4 class="name">Home Accounting</h4>
+    <p class="designation">Software</p>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wallet</mat-label>
+      <mat-select [(ngModel)]="selectedWallet" name="wallet" (selectionChange)="onWalletChange()">
+        <mat-option *ngFor="let wallet of wallets" [value]="wallet">
+          {{wallet.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button class="menu-button" routerLink="/dashboard" routerLinkActive="active">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/transactions" routerLinkActive="active">
+      <mat-icon>paid</mat-icon>
+      <span>Transactions</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/wallets" routerLinkActive="active">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <span>Wallets</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z4">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

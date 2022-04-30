@@ -1,0 +1,24 @@
+<h1 mat-dialog-title *ngIf="action == 'ADD'">Adding new wallet</h1>
+<h1 mat-dialog-title *ngIf="action == 'UPDATE'">Updating wallet</h1>
+<h1 mat-dialog-title *ngIf="action == 'DELETE'">Are you sure to remove wallet?</h1>
+
+<div mat-dialog-content *ngIf="action != 'DELETE'">
+  <div fxLayout="column">
+<!--        Name of wallet-->
+    <mat-form-field appearance="outline">
+      <mat-label>Wallet name</mat-label>
+      <input matInput [(ngModel)]="localData.wallet.name">
+    </mat-form-field>
+<!--        Currency of wallet-->
+    <mat-form-field appearance="outline">
+      <mat-label>Wallet currency</mat-label>
+      <input matInput [(ngModel)]="localData.wallet.currency">
+    </mat-form-field>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="end stretch">
+  <div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+    <button mat-button (click)="doAction()" mat-flat-button color="primary">{{action}}</button>
+  </div>
+</div>
