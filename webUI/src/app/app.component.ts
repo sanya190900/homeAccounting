@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
         if (localStorage.getItem('wallet') !== null) {                    // If wallet was specified
           const lsw = localStorage.getItem('wallet');                     // getting this wallet from local storage
           this.selectedWallet = lsw !== null ? JSON.parse(lsw) : null;        // If wallet was specified setting it as selected wallet
-        } else {
-          this.selectedWallet = wallets[0];                                   // If not specified → selecting default wallet from db
         }
+
+        this.selectedWallet = wallets[0];                                   // If not specified → selecting default wallet from db
         localStorage.setItem('wallet', JSON.stringify(this.selectedWallet));  // setting it to local storage
       },
       error => console.log(error)   // If error → logging it
