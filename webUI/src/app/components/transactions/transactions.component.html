@@ -1,32 +1,32 @@
-<div *ngIf="dataSource.data.length > 0; else elseBlock">
-  <div fxLayout="column" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="space-around center">
-      <mat-card>
-        <mat-form-field appearance="outline">
-          <mat-label>Period</mat-label>
-          <mat-select [(ngModel)]="selectedPeriod" name="period" (selectionChange)="onPeriodChange()">
-            <mat-option *ngFor="let period of periods" [value]="period.value">
-              {{period.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+<div fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-card>
+      <mat-form-field appearance="outline">
+        <mat-label>Period</mat-label>
+        <mat-select [(ngModel)]="selectedPeriod" name="period" (selectionChange)="onPeriodChange()">
+          <mat-option *ngFor="let period of periods" [value]="period.value">
+            {{period.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" [ngStyle]="isHidden()" style="margin-left: 20px">
-          <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
-            <input matStartDate formControlName="start">
-            <input matEndDate formControlName="end">
-          </mat-date-range-input>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker touchUi #picker>
-            <mat-date-range-picker-actions>
-              <button mat-button matDateRangePickerCancel (click)="cancelCustomPeriod()">Cancel</button>
-              <button mat-raised-button color="primary" matDateRangePickerApply (click)="createCustomPeriod()">Apply</button>
-            </mat-date-range-picker-actions>
-          </mat-date-range-picker>
-        </mat-form-field>
-      </mat-card>
-    </div>
+      <mat-form-field appearance="outline" [ngStyle]="isHidden()" style="margin-left: 20px">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
+          <input matStartDate formControlName="start">
+          <input matEndDate formControlName="end">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker touchUi #picker>
+          <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel (click)="cancelCustomPeriod()">Cancel</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply (click)="createCustomPeriod()">Apply</button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
+      </mat-form-field>
+    </mat-card>
+  </div>
+  <div *ngIf="dataSource.data.length > 0; else elseBlock">
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <mat-card style="width: 100%">
         <div style="float: right; margin-bottom: 10px">
@@ -71,10 +71,10 @@
       </mat-card>
     </div>
   </div>
+  <ng-template #elseBlock>
+    <button mat-button mat-flat-button color="primary" (click)="openDialog('ADD', {})">
+      <mat-icon>add</mat-icon>
+    </button>
+    <app-page-not-found></app-page-not-found>
+  </ng-template>
 </div>
-<ng-template #elseBlock>
-  <button mat-button mat-flat-button color="primary" (click)="openDialog('ADD', {})">
-    <mat-icon>add</mat-icon>
-  </button>
-  <app-page-not-found></app-page-not-found>
-</ng-template>
